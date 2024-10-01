@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <title>Deepfake Detection</title>
+    <style>
+        /* Add the provided dark and edge lights CSS here */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background: #23242a;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .navbar {
+            background-color: #333;
+            padding: 15px 0;
+            text-align: center;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar-brand {
+            color: #fff;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .container-edge {
+            position: relative;
+            width: 600px;
+            height: 400px;
+            margin: 20px auto;
+            background: #1c1c1c;
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container-edge::before,
+        .container-edge::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 200%; /* Increase width here */
+            height: 200%; /* Adjust height as needed */
+            background: linear-gradient(90deg, transparent, transparent, #45f3ff, #45f3ff, #45f3ff);
+            z-index: 1;
+            animation: animate 6s linear infinite;
+        }
+
+        .container-edge::after {
+            background: linear-gradient(90deg, transparent, transparent, #ff2770, #ff2770, #ff2770);
+            animation-delay: -3s;
+        }
+
+        @keyframes animate {
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+            100% {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+
+        .container-edge-content {
+            position: relative;
+            z-index: 2;
+            padding: 20px;
+            color: #fff;
+        }
+
+        .card {
+            border: 0;
+            width: 550px;
+            height: 350px;
+        }
+
+        .card-header {
+            background-color: #1574e1;
+            border-radius: 10px 10px 0 0;
+            padding: 15px;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+        }
+
+        .card-body {
+            padding: 15px;
+        }
+
+        .btn-primary {
+            background-color: #030c16ce;
+            border: 0;
+        }
+
+        /* Your existing form styles */
+        /* Add your form styles here */
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid"> <!-- Change to container-fluid -->
+        <a class="navbar-brand" href="#">SYNTHETIC IMAGE INTEGRITY CHECKER</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container-edge">
+    <div class="container-edge-content">
+        <div class="card">
+            <div class="card-header">
+                <h1 class="card-title">SYNTHETIC IMAGE INTEGRITY CHECKER</h1>
+            </div>
+            <div class="card-body">
+                <form action="/upload" method="post" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="customFile" class="form-label">Choose file</label>
+                        <input type="file" class="form-control" id="customFile" name="file" onchange="updateFileName()">
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-3">Upload</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function updateFileName() {
+        var fileName = document.getElementById("customFile").files[0].name;
+        document.getElementById("customFile").nextElementSibling.innerHTML = fileName;
+    }
+</script>
+
+</body>
+</html>

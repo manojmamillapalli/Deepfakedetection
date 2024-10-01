@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Deepfake Detection Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #23242a; /* Darkened background */
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .video-box,
+        .result-box {
+            padding: 20px;
+            box-sizing: border-box;
+            box-shadow: 0 20px 20px rgba(4, 224, 180, 0.1);
+            border-radius: 8px;
+            margin: 0 10px;
+            position: relative;
+            overflow: hidden; /* Prevents content overflow */
+        }
+
+        .video-box {
+            background-color: #1c1c1c; /* Dark background for the video box */
+            width: 70%; /* 70% width for video-box */
+        }
+
+        .result-box {
+            background-color: #f0f0f0;
+            width: 30%; /* 30% width for result-box */
+        }
+
+        h1 {
+            text-align: center;
+            color: #333333;
+        }
+
+        p {
+            margin: 0 0 10px;
+            color: #666666;
+        }
+
+        video {
+            width: 100%;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        {% if video_info %}
+            <div class="video-box">
+                <div class="video-light"></div>
+                <h1>Video</h1>
+                <video controls>
+                    <source src="{{ video_url }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="result-box">
+                <h1>Deepfake Detection Result</h1>
+                <p>Video Name: {{ video_info.name }}</p>
+                <p>Video Size: {{ video_info.size }}</p>
+                <p>Uploaded by: {{ video_info.user }}</p>
+                <p>Uploaded at: {{ video_info.source }}</p>
+                {% if accuracy != 'N/A' %}
+                    <p>Fake Accuracy: {{ accuracy }}%</p>
+                {% endif %}
+                {% if detection_result %}
+                    <p>Deepfake Detection Result: {{ detection_result }}</p>
+                    <p>Percentage of Real Frames: {{ real_percentage }}%</p>
+                    <p>Percentage of Fake Frames: {{ fake_percentage }}%</p>
+                {% endif %}
+            </div>
+        {% else %}
+            <p>Video information not provided. Please upload a video and try again.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
